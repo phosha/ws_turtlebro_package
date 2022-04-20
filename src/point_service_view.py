@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-"""
-voltbro 2022
-"""
+
 
 from turtlebro_patrol.srv import PatrolPointCallback, PatrolPointCallbackRequest, PatrolPointCallbackResponse 
 from turtlebro_heat_excursion.srv import ArucoDetect, ArucoDetectResponse, ArucoDetectRequest
@@ -21,20 +19,33 @@ def handle_request(req:PatrolPointCallbackRequest):
     text = "Местоположение неизвестно"
     
     if point_name == "1":
-        text = "Я в точке 1"
+        text = "Наша первая картина"
 
-    if point_name == "2":
-        text = "Я в точке 2"
+    elif point_name == "2":
+        text = "Наша вторая картина"
+    
+    elif point_name == "3":
+        text = "Наша третья картина"
+    elif point_name == "4":
+        text = "Наша последняя картина"
 
-    if point_name == "home":
-        text = "Я дома"
+    elif point_name == "home":
+        text = "Экскурсия окончена всем спасибо"
 
     aruco_result = aruco_detect.call(ArucoDetectRequest())
 
     if aruco_result.id > 0:
-        text += f". Вижу маркер {aruco_result.id}"
+        if aruco_result.id == 22:
+            text += ". Сальвадор Дали Постоянство памяти"
+        elif aruco_result.id == 32:
+            text += ". Сальвадор Дали Постоянство памяти"
+        elif aruco_result.id == 42:
+            text += ". Сальвадор Дали Постоянство памяти"
+        elif aruco_result.id == 52:
+            text += ". Сальвадор Дали Постоянство памяти"
+
     else : 
-        text += ". Маркер не обнаружен"    
+        text += ". Картину украли"    
 
     say_text(text)
 
